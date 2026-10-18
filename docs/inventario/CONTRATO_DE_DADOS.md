@@ -19,6 +19,7 @@ As três lojas do contrato de saída precisam ser associadas a identificadores r
 | Assunto | Campos lógicos necessários | Validação |
 |---|---|---|
 | Produto | chave estável, marca, código/SKU de origem, unidade de medida | Chave sem colisão depois do mapeamento; códigos originais preservados |
+| Atributos opcionais | atributos técnicos confirmados e fase de ciclo de vida/fim de vida, com origem e vigência | Usar somente em métodos de cold start ou declínio se estiverem presentes e validados; não inferir classificação |
 | Loja | identificador de origem, nome/alias, vínculo à posição loja_1, loja_2 ou loja_3 | Cada identificador mapeado uma única vez |
 | Venda do último mês | quantidade por SKU e loja, mês de referência | O mês precisa estar fechado e igual para as três lojas |
 | Venda anual | quantidade por SKU e loja, período inicial/final | Confirmar se é janela móvel de 12 meses ou ano-calendário |
@@ -45,7 +46,7 @@ Os campos abaixo não estão no cálculo de DMM recebido, mas podem ser indispen
 - lote mínimo e múltiplo de embalagem;
 - regras de compra por fornecedor e restrições de orçamento, se aplicáveis.
 
-Sem a fórmula aprovada e seus campos de entrada, calcular DMM ou estoque de segurança não autoriza calcular sugestao_compra_total.
+Sem a fórmula aprovada e seus campos de entrada, calcular DMM ou estoque de segurança não autoriza calcular sugestao_compra_total. Métodos de cold start, ciclo de vida ou calibração entre itens são opcionais: só podem ser avaliados quando os atributos forem confirmados e os grupos de SKUs forem justificáveis.
 
 ## Mapeamento físico depois do recebimento
 
