@@ -19,6 +19,6 @@ O importador não exige rede, não lê bases privadas e não altera o ERP. Se a 
 
 O código teve validação sintática e estrutural em simulação. **Não foi executado no serviço Figma** nesta entrega, devido ao limite informado. Verifique a primeira tela em tamanho normal, os campos com texto longo, os componentes e a versão mobile. Se Open Sans não estiver disponível, ele escolhe uma fonte disponível e registra a substituição. Diferenças métricas podem exigir ajuste de largura ou quebra de linha.
 
-Os protótipos de navegação e as operações interativas estão em `prototype/index.html`. As composições importadas são especificações visuais editáveis; não executam a lógica do HTML nem conectam um banco.
+Os protótipos de navegação e as operações interativas estão em `app/prototype/index.html`. As composições importadas são especificações visuais editáveis; não executam a lógica do HTML nem conectam um banco.
 
 `runtime.js` contém a lógica legível; `code.js` agrega os dados das composições e a lógica em um arquivo pronto para o plugin local. O manifesto é um modelo porque IDs de plugins são atribuídos pelo Figma, não inventados pelo projeto.

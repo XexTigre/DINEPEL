@@ -6,17 +6,17 @@ O aplicativo permite construir uma base técnica própria e reaproveitar a mesma
 
 ## O que está entregue
 
-- [Prévia navegável](../../prototype/index.html), independente de instalação e de bibliotecas externas: catálogo, ficha de peça, marcas, empresas, ficha da empresa, estoque, importações, histórico e estrutura dos dados.
+- [Prévia navegável](../../app/prototype/index.html), independente de instalação e de bibliotecas externas: catálogo, ficha de peça, marcas, empresas, ficha da empresa, estoque, importações, histórico e estrutura dos dados.
 - Cadastro local de peça, marca e empresa; detecção de duplicidade; vínculo de peça a uma empresa; filtro de marcas e empresa; busca; exportação e restauração do backup local.
-- Consulta de um [catálogo público sintético](../../examples/catalogo-demo.json) no GitHub: resolve o commit de `main`, lê o arquivo naquele SHA e prepara um lote para conferência. A consulta não escreve no GitHub.
+- Consulta de um [catálogo público sintético](../../app/examples/catalogo-demo.json) no GitHub: resolve o commit de `main`, lê o arquivo naquele SHA e prepara um lote para conferência. A consulta não escreve no GitHub.
 - [Contrato JSON do catálogo](catalogo.schema.json), [arquitetura e grafos](ARQUITETURA.md) e [limites e validação](VALIDACAO.md).
-- [Importador para Figma](../../figma-importer/README.md), com camadas editáveis. Sua execução no Figma ainda precisa ser confirmada; o acesso MCP ao arquivo foi bloqueado pela cota Starter.
+- [Importador para Figma](../../app/figma-importer/README.md), com camadas editáveis. Sua execução no Figma ainda precisa ser confirmada; o acesso MCP ao arquivo foi bloqueado pela cota Starter.
 
 Todos os produtos, marcas, empresas, códigos e saldos de demonstração foram criados para este protótipo. Não são dados operacionais nem evidência de aplicação automotiva.
 
 ## Usar agora
 
-Baixe `prototype/index.html` e abra no navegador. O arquivo já contém os dados de demonstração. Para testar a importação sem rede, selecione `examples/catalogo-demo.json` na tela **Importações**. Para testar a leitura online, use **Consultar GitHub** depois que os arquivos estiverem disponíveis em `XexTigre/DINEPEL`.
+Baixe `app/prototype/index.html` e abra no navegador. O arquivo já contém os dados de demonstração. Para testar a importação sem rede, selecione `app/examples/catalogo-demo.json` na tela **Importações**. Para testar a leitura online, use **Consultar GitHub**.
 
 **Nova peça** cria uma ficha técnica pendente. **Vincular** associa a peça à empresa selecionada com código interno e sistema de origem. Troque a empresa no cabeçalho para consultar seus vínculos e saldos.
 

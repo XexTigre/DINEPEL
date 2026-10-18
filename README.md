@@ -1,37 +1,35 @@
 # DINEPEL
 
-Base reutilizável de peças, marcas e empresas, com documentação do inventário multiloja.
+Base reutilizável de peças, marcas, aplicações e empresas, com documentação do inventário multiloja.
 
-## App de consulta e cadastro
+## Comece pelo app
 
-A [prévia navegável](prototype/index.html) permite testar catálogo, marcas, empresas e filiais, vínculos, estoque e importação. Abra o HTML baixado no navegador. O salvamento é local e os exemplos são fictícios.
+A [prévia navegável](app/prototype/index.html) demonstra catálogo, marcas, empresas, filiais, vínculos, estoque, importações e histórico. Ela usa dados fictícios e salva apenas neste navegador. Veja [como executar e como a pasta está organizada](app/README.md).
 
-Comece pelo [guia do app](docs/app/README.md). A [arquitetura com grafos](docs/app/ARQUITETURA.md) separa o cadastro técnico dos códigos, saldos e dados comerciais de cada empresa. A versão de produção ainda precisa de API autenticada e PostgreSQL.
-
-O [importador de camadas editáveis](figma-importer/README.md) prepara as telas para Figma; a execução online permanece pendente porque a cota MCP Starter bloqueou o acesso. A [validação](docs/app/VALIDACAO.md) distingue testes locais das etapas ainda não executadas.
+O app ainda não tem API nem banco de produção. A arquitetura prevista está em [docs/app/ARQUITETURA.md](docs/app/ARQUITETURA.md); o contrato JSON do catálogo está em [docs/app/catalogo.schema.json](docs/app/catalogo.schema.json). A prévia não altera o SysPro nem recomenda compras.
 
 ## Inventário multiloja
 
-O [módulo de inventário](docs/inventario/README.md) continua em especificação, com três posições no schema de produção. Suas fórmulas e gates permanecem válidos. A prévia não calcula compras nem escreve no SysPro.
+As regras, os gates e o schema da saída de inventário ficam em [docs/inventario/](docs/inventario/README.md). A especificação mantém três lojas no contrato de saída. Ela não muda o número de filiais que o catálogo do app pode armazenar.
 
-## Organização
+## Mapa do repositório
 
 | Caminho | Conteúdo |
 |---|---|
-| `prototype/index.html` | Prévia independente de instalação |
-| `examples/` | Catálogo e base estritamente sintéticos |
-| `figma-importer/` | Código e instruções para camadas editáveis |
-| `docs/app/` | Arquitetura, contrato do catálogo e validação |
-| `docs/inventario/` | Regras e schema de recomendação de compras |
-| `tests/` | Verificações funcionais da prévia |
+| `app/prototype/` | Prévia independente de instalação |
+| `app/examples/` | Catálogos e bases fictícios |
+| `app/figma-importer/` | Importador e instruções de camadas editáveis |
+| `app/scripts/` | Exportação e empacotamento do importador |
+| `app/tests/` | Testes funcionais da prévia |
+| `docs/app/` | Arquitetura, contrato e validação do app |
+| `docs/inventario/` | Regras e contrato de reabastecimento |
 
-## Proteção das bases
+## Proteção dos dados
 
-O repositório é público. Use apenas exemplos sintéticos ou efetivamente sanitizados. Bancos reais, PDFs operacionais, dados pessoais, credenciais, custos, vendas e saldos de empresas ficam em ambiente privado. O GitHub guarda código e contratos; a operação multiusuário usa uma API e um banco.
+Este repositório é público. Mantenha aqui apenas código, contratos e exemplos sintéticos ou sanitizados. Bancos reais, PDFs operacionais, dados pessoais, credenciais, custos, vendas e saldos de empresas devem ficar em armazenamento privado.
 
 - [Regras do projeto](AGENTS.md)
 - [Guia do app](docs/app/README.md)
-- [Arquitetura e relações](docs/app/ARQUITETURA.md)
-- [Contrato do catálogo](docs/app/catalogo.schema.json)
-- [Índice do inventário](docs/inventario/README.md)
-
+- [Arquitetura e grafos](docs/app/ARQUITETURA.md)
+- [Validação](docs/app/VALIDACAO.md)
+- [Inventário multiloja](docs/inventario/README.md)

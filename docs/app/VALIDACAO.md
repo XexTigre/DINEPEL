@@ -42,6 +42,7 @@ O HTML não implementa backend, autenticação, isolamento de banco, controle de
 Instale Playwright em um ambiente de desenvolvimento e seu Chromium. Execute a partir do repositório:
 
 ```bash
+cd app
 node tests/prototype.cjs
 ```
 
@@ -50,6 +51,7 @@ O teste usa um perfil temporário e gera evidências em uma pasta temporária do
 Para reconstruir o importador depois de editar a prévia:
 
 ```bash
+cd app
 node scripts/export_figma.cjs
 python scripts/package_importer.py
 node --check figma-importer/code.js
