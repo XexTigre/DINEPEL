@@ -23,7 +23,9 @@ O teste funcional automatizado executou 24 verificações com Chromium headless.
 
 As telas desktop, ficha da peça, importação e catálogo mobile foram renderizadas e inspecionadas visualmente. A versão mobile mostra as ações junto das peças. Tabelas extensas, como a matriz de estoque, usam rolagem interna.
 
-O cenário de GitHub do teste usa respostas simuladas para ser reproduzível. Uma leitura real do arquivo no commit publicado é uma verificação separada; seu resultado será registrado abaixo somente depois que acontecer.
+O cenário de GitHub do teste usa respostas simuladas para ser reproduzível. Após a publicação, os 18 arquivos novos ou atualizados foram confirmados no repositório. A leitura autenticada do GitHub confirmou o catálogo de sete peças e o HTML publicado idêntico ao arquivo testado. O hash do schema de compras existente permaneceu igual.
+
+A tentativa de consulta direta pelo navegador deste ambiente falhou com `Failed to fetch`. Portanto, a leitura online pelo app não está confirmada de ponta a ponta. A importação local do catálogo JSON foi testada e permanece disponível. Não foi configurado um banco de produção.
 
 ## Figma
 
