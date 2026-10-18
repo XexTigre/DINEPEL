@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/XexTigre/DINEPEL/blob/main/docs/inventario/saida_reabastecimento.schema.json",
+  "title": "SugestaoReabastecimentoSKU",
+  "description": "Contrato de saída por SKU, conforme solicitado para o inventário multiloja DINEPEL.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sku",
+    "analise_contexto_historico",
+    "demanda_total_rede_mensal",
+    "sugestao_compra_total",
+    "distribuicao_sugerida"
+  ],
+  "properties": {
+    "sku": {
+      "type": "string",
+      "minLength": 1
+    },
+    "analise_contexto_historico": {
+      "type": "string"
+    },
+    "demanda_total_rede_mensal": {
+      "type": "number"
+    },
+    "sugestao_compra_total": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "distribuicao_sugerida": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "loja_1",
+        "loja_2",
+        "loja_3"
+      ],
+      "properties": {
+        "loja_1": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "loja_2": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "loja_3": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}
