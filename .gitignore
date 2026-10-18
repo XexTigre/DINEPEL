@@ -1,0 +1,20 @@
+# Bases e exportações locais do ERP — não versionar
+/data/
+/dados/
+/bases/
+/exports/
+/entrada/
+
+# Bancos e backups locais
+*.db
+*.sqlite
+*.sqlite3
+*.mdb
+*.accdb
+*.bak
+*.dump
+
+# Segredos locais
+.env
+.env.*
+!.env.example
