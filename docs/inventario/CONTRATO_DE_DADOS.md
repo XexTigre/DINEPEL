@@ -23,9 +23,12 @@ As três lojas do contrato de saída precisam ser associadas a identificadores r
 | Venda do último mês | quantidade por SKU e loja, mês de referência | O mês precisa estar fechado e igual para as três lojas |
 | Venda anual | quantidade por SKU e loja, período inicial/final | Confirmar se é janela móvel de 12 meses ou ano-calendário |
 | Série para desvio padrão | quantidade mensal por SKU e loja, data/mês | Janela contínua e unidade comparável; agregado anual isolado não basta |
+| Série para backtest | demanda observada por mês, SKU e loja, incluindo meses sem venda quando a fonte confirmar completude; previsões anteriores, quando disponíveis | Manter ordem temporal; identificar corte, horizonte e versão da previsão; não tratar ausência de linha como zero sem confirmar cobertura da fonte |
 | Estoque físico | saldo por SKU e loja, unidade, data/hora do snapshot | Saldo negativo é preservado e sinalizado; não normalizar para zero |
 | Curva | classe A, B ou outra, origem e data de vigência | A/B usam as fórmulas recebidas; demais classes ficam pendentes |
-| Métrica MAPE | SKU, loja ou escopo da métrica, período, valor, versão do cálculo | Marcar MAPE estritamente superior a 20%; não misturar períodos |
+| Métrica MAPE | SKU, loja ou escopo da métrica, período, valor, versão do cálculo | Marcar MAPE estritamente superior a 20%; com venda real zero, registrar métrica como não definida e não fabricar percentual |
+| Métricas complementares | MAE, MASE quando válido, viés assinado, fill rate, dias em ruptura e estoque médio, com SKU/loja/período/método | Comparar mesmo horizonte e mesmos cortes temporais; registrar denominadores ausentes ou inválidos |
+| Log de backtest | corte de treino, meses de teste, horizonte, método, regra/versão e métricas | Previsões devem usar somente informação disponível no corte; manter resultados reproduzíveis |
 | Anomalia semântica | SKU, loja, período, texto original, origem do registro | Preservar texto e contexto; não transformar texto em fator sem regra aprovada |
 | Fator de cobertura | SKU/loja ou escopo, valor, regra e versão, justificativa, período | Não aceitar fator sem origem e regra reproduzíveis |
 
@@ -36,7 +39,8 @@ Os campos abaixo não estão no cálculo de DMM recebido, mas podem ser indispen
 - pedidos de compra confirmados e ainda não recebidos;
 - reservas, separações e compromissos de venda;
 - transferências entre lojas em trânsito;
-- prazo de reposição por fornecedor e produto;
+- prazo de reposição por fornecedor e produto, incluindo datas reais de pedido e recebimento para medir sua variabilidade;
+- intervalo de revisão da compra e nível de serviço/cobertura aprovado, se adotados pela política;
 - cobertura desejada ou nível de serviço;
 - lote mínimo e múltiplo de embalagem;
 - regras de compra por fornecedor e restrições de orçamento, se aplicáveis.
@@ -67,7 +71,9 @@ Valores originais devem permanecer recuperáveis. Qualquer normalização fica e
 - Não somar venda anual com linhas duplicadas; reconciliar totais com a fonte.
 - Preservar saldos negativos e registrar o alerta operacional correspondente.
 - Não descartar automaticamente devoluções, cancelamentos, vendas negativas ou meses sem venda. Primeiro classificar como o sistema de origem os representa e aprovar a regra de tratamento.
-- Se o desvio padrão for exigido, verificar se existe histórico mensal suficiente para cada SKU e loja.
+- Se o desvio padrão ou backtest for exigido, verificar se existe histórico mensal suficiente por SKU/loja e se os meses sem venda são observações completas ou lacunas de extração.
+- Calcular MAPE somente quando o valor real permitir divisão; complementar os relatórios com MAE, MASE quando válido, viés e resultados de serviço.
+- Sinalizar picos estatísticos para revisão; preservar os valores originais e não excluir vendas sem motivo e regra aprovados.
 - Se faltar campo obrigatório, houver conflito de identidade ou diferença de período, bloquear o SKU e produzir relatório de qualidade em canal separado.
 
 ## Proteção das bases
