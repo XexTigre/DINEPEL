@@ -11,6 +11,7 @@ A versão inicial trabalha com três lojas porque o contrato de saída recebido 
 ## Regras de funcionamento
 
 - Cálculos numéricos, agregações, desvio padrão, percentuais, arredondamentos e validações matemáticas serão executados por código Python/Pandas.
+- As fórmulas recebidas são a linha de base. Métodos candidatos da [revisão metodológica de outubro de 2026](REVISAO_METODOLOGICA_2026-10.md) só podem substituir essa linha após backtest temporal, registro de evidência e aprovação.
 - O modelo não completa dado ausente por estimativa, não inventa fator de cobertura e não altera saldo físico de origem.
 - Cada execução registra identificação e período das fontes, versão das regras e resultado da validação.
 - Uma sugestão só pode ser emitida quando todas as entradas e regras necessárias para aquele SKU estiverem disponíveis.
@@ -67,13 +68,17 @@ Antes de cada recomendação, o processamento deve:
 3. ler os registros de anomalia semântica e manter o texto, o período, a loja e a origem;
 4. carregar somente fatores de cobertura associados a uma regra versionada e a uma evidência de histórico.
 
-O pedido ainda não informa como transformar MAPE ou uma descrição de anomalia em alteração numérica do fator de cobertura. Essa relação precisa ser aprovada e versionada. Sem log, período ou regra de ajuste válidos, o sistema não afirma que aprendeu e bloqueia a recomendação correspondente.
+O pedido ainda não informa como transformar MAPE ou uma descrição de anomalia em alteração numérica do fator de cobertura. Essa relação precisa ser aprovada e versionada. MAPE > 20% é um gatilho de revisão, não uma regra automática de aumento de estoque. MAPE não é definido quando a venda real é zero; o relatório deve registrar essa condição e acompanhar MAE, MASE quando válido, viés e métricas de serviço. Sem log, período ou regra de ajuste válidos, o sistema não afirma que aprendeu e bloqueia a recomendação correspondente. Os critérios completos de validação estão na [revisão metodológica](REVISAO_METODOLOGICA_2026-10.md).
 
 ## Picos de venda e desvio padrão
 
 O desvio padrão será calculado em código sobre uma série histórica mensal por SKU e loja. O período de observação, a quantidade mínima de meses, o limite em sigmas, o uso de desvio padrão amostral ou populacional e o tratamento de pico isolado ainda precisam ser definidos.
 
-Um pico classificado como isolado pode deixar de influenciar a estimativa de recorrência somente pela regra aprovada. A venda original permanece preservada e auditável; nunca é apagada da fonte.
+O desvio padrão sinaliza uma observação para revisão; não autoriza apagar nem excluir automaticamente a venda. Antes de isolar um pico da recorrência, verificar contexto operacional e registrar motivo e regra aprovada. Manter a série original e comparar o resultado com e sem ajuste, pois um pico real pode continuar relevante para o nível de serviço.
+
+## Revisão metodológica
+
+A revisão de outubro de 2026 recomenda avaliar demanda intermitente por SKU, validar previsões em cortes históricos sucessivos e acompanhar métricas de erro e de serviço. Essas recomendações são candidatas a teste, não uma substituição das fórmulas determinísticas recebidas. MAPE > 20% continua como alerta de revisão, sem conversão automática em fator de cobertura.
 
 ## Contrato de saída por SKU
 
@@ -119,7 +124,8 @@ O diagrama é conceitual: nomes de tabelas, chaves internas e relacionamentos f�
 | Curva | A = 0,5 × DMM; B = 0,3 × DMM | Tratamento para Curva C e outras classes |
 | Compra total | Deve ser inteiro | Fórmula, cobertura, posição de estoque e suprimentos em aberto |
 | Distribuição | Participação proporcional à DMM | Regra quando rede tem DMM zero e regra de arredondamento final |
-| Histórico | Revisar MAPE > 20% e ler anomalias | Janela de “recente” e regra numérica de ajuste dos fatores |
+| Histórico | Revisar MAPE > 20% e ler anomalias | Janela de “recente”, métricas complementares e regra numérica de ajuste dos fatores |
+| Métodos candidatos | DMM e ES atuais como linha de base; métodos novos em modo sombra | Histórico suficiente, horizonte de backtest, critérios de seleção e aprovação |
 | Outliers | Usar desvio padrão e isolar picos isolados da recorrência | Janela, mínimo de observações, limite sigma e tratamento |
 | Saldo negativo | Cobrir o negativo primeiro e emitir alerta urgente | Fonte/canal do alerta e composição da quantidade a comprar |
 | Saída | JSON estrito por SKU | Estado de bloqueio, lote de SKUs e canal separado de alertas |
@@ -130,4 +136,5 @@ O diagrama é conceitual: nomes de tabelas, chaves internas e relacionamentos f�
 2. Mapear campos reais ao [contrato de dados](CONTRATO_DE_DADOS.md), sem renomear nem alterar valores de origem.
 3. Apontar lacunas e conflitos entre vendas, estoque e logs.
 4. Fechar as decisões pendentes com dados reais.
-5. Criar casos sanitizados e reproduzíveis; só então implementar os cálculos e validar o resultado contra este contrato.
+5. Caracterizar a demanda por SKU/loja e executar backtests temporais da linha de base e dos candidatos, quando houver histórico suficiente.
+6. Criar casos sanitizados e reproduzíveis; só então implementar os cálculos e validar o resultado contra este contrato.
