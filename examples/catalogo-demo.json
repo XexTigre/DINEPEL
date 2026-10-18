@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "kind": "catalogo",
+  "synthetic": true,
+  "brands": [
+    {
+      "id": "marca-alfa",
+      "name": "Alfa (demo)"
+    },
+    {
+      "id": "marca-beta",
+      "name": "Beta (demo)"
+    },
+    {
+      "id": "marca-gama",
+      "name": "Gama (demo)"
+    }
+  ],
+  "products": [
+    {
+      "id": "peca-demo-001",
+      "brand_id": "marca-alfa",
+      "code": "PL-100",
+      "name": "Suporte do conjunto",
+      "unit": "UN",
+      "status": "revisado",
+      "source": "Exemplo sintético DINEPEL v0.1"
+    },
+    {
+      "id": "peca-demo-002",
+      "brand_id": "marca-beta",
+      "code": "PL-100",
+      "name": "Suporte de fixação",
+      "unit": "UN",
+      "status": "pendente",
+      "source": "Exemplo sintético DINEPEL v0.1"
+    },
+    {
+      "id": "peca-demo-003",
+      "brand_id": "marca-alfa",
+      "code": "RE-020",
+      "name": "Reservatório auxiliar",
+      "unit": "PC",
+      "status": "pendente",
+      "source": "Exemplo sintético DINEPEL v0.1"
+    },
+    {
+      "id": "peca-demo-004",
+      "brand_id": "marca-gama",
+      "code": "CO-030",
+      "name": "Conector do circuito",
+      "unit": "UN",
+      "status": "revisado",
+      "source": "Exemplo sintético DINEPEL v0.1"
+    },
+    {
+      "id": "peca-demo-005",
+      "brand_id": "marca-beta",
+      "code": "BU-040",
+      "name": "Bucha de apoio",
+      "unit": "UN",
+      "status": "pendente",
+      "source": "Exemplo sintético DINEPEL v0.1"
+    },
+    {
+      "id": "peca-demo-006",
+      "brand_id": "marca-gama",
+      "code": "KT-050",
+      "name": "Kit de reparo",
+      "unit": "KT",
+      "status": "pendente",
+      "source": "Exemplo sintético DINEPEL v0.1"
+    },
+    {
+      "id": "peca-demo-007",
+      "brand_id": "marca-alfa",
+      "code": "VA-060",
+      "name": "Válvula auxiliar",
+      "unit": "UN",
+      "status": "pendente",
+      "source": "Exemplo sintético DINEPEL v0.1"
+    }
+  ]
+}

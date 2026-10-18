@@ -1,0 +1,9 @@
+{
+  "name": "DINEPEL — importar estrutura editável",
+  "id": "USE_O_ID_GERADO_PELO_FIGMA",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {"allowedDomains": ["none"]}
+}
